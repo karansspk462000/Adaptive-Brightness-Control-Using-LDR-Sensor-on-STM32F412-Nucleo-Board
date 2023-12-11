@@ -1,0 +1,50 @@
+//Adaptive Brightness with Potentiometer acting as AO of LDR
+#include "stm32f412zx.h"
+void delay_tim( uint32_t dd);
+int main(void)
+{
+        
+
+   RCC->APB2ENR |= 0x100; //enable clock for ADC1 by setting 8th bit as 1
+	 RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;
+   RCC->AHB1ENR |= 0x3; // Enable GPIO Port A and B clock
+   GPIOB->MODER |= 0x1; // Set PB0 as output for External LED
+	 GPIOA->MODER =0x3;//PA0 in analog mode for pot
+	 ADC1->CR2 |= 0x2; // enable continuous conversion mode by setting 1st bit as 1
+   ADC1->CR2 |= 0x400; // EOC after each conversion
+   ADC1->CR2 |= 0x1; // ADON =1 enable ADC
+	 ADC1->SQR3 |= 0; // conversion in regular sequence
+        
+     
+    
+   while(1)
+    { ADC1->SR = 0; // clear the status register
+      ADC1->CR2 |= (0x40000000); // starting conversion by SWSTART
+
+      // Checking until conversion completes
+      if((ADC1->SR & (0x2)))
+        {
+          uint16_t adc_value=ADC1->DR; //Storing value of data register in the variable
+          uint16_t duty_cycle=adc_value/80;
+
+          // Calculate the delay for the LED to remain on
+            uint32_t delay = duty_cycle * 10;
+          // Turn on the LED
+            GPIOB->ODR = 0x0;
+    
+          // Wait for the appropriate amount of time
+			      for (volatile uint32_t i = 0; i < delay; i++);
+	
+          // Turn off the LED
+            GPIOB->ODR = 0x1;
+					
+          // Wait for the remaining time until the next duty cycle
+             uint32_t off_delay = 1000 - delay;
+             for (volatile uint32_t i = 0; i < off_delay; i++);
+	
+          }
+			}
+}
+
+		
+					

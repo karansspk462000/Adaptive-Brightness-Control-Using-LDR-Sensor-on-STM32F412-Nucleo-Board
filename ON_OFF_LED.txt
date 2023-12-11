@@ -1,0 +1,34 @@
+//On and Off LED 
+#include "stm32f412zx.h"
+
+int main(void)
+{
+        
+    RCC->AHB1ENR = 0x3; // Enable GPIO Port A and B clock
+    GPIOA->MODER =0x00555500; //Making PA4 to PA11 as ouput for Seven Segment
+    GPIOB->MODER = 0x1; // Set PB0 as output for LED
+   
+    while(1)
+    {
+        // Read voltage level on PA1
+        uint32_t voltage_level = GPIOA->IDR & 0x2;
+        
+        // Control LED at PA7 based on voltage level
+        if (voltage_level)
+					
+				{//GPIOA->ODR=0x100;//9(Hexadecimal number for glowing 9)
+					//GPIOA->ODR=0x400;//0(Hexadecimal number for glowing 0)
+					GPIOA->ODR=0x780;//7(Hexadecimal number for glowing 7)
+					
+                             
+							 // Turn on the LED
+								 GPIOB->ODR = 0x0;
+														
+                             
+						 }
+                        
+        else
+				{GPIOA->ODR=0x790;//1(Hexadecimal number for glowing 1)
+					GPIOB->ODR |= 0x1; // Turn off LED
+    }
+}}
