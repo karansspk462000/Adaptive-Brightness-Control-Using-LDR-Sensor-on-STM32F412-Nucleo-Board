@@ -5,11 +5,11 @@ Done Brightness Control of LED using LDR sensor deployed on STM32F412 nucleo boa
 
 1. For Running the files just copy below following files to Keil in your PC:
 
-ON_OFF_LED.txt
+  ON_OFF_LED.txt
 
-Brightness_Control_LDR.txt
+  Brightness_Control_LDR.txt
 
-Adaptive_Brightness_Potentiometer.txt
+  Adaptive_Brightness_Potentiometer.txt
 
 2. Then run these files after connecting STM32F412 board to your PC.
 
