@@ -21,4 +21,4 @@ Done Brightness Control of LED using LDR sensor deployed on STM32F412 nucleo boa
 1. [Rahul Madaan](https://github.com/Reiner009)
 
 # Result
-![Image1](Open_Manipulator.gif)
+![Image1](Potentiometer_Brightness.gif)
