@@ -22,9 +22,9 @@ Done Brightness Control of LED using LDR sensor deployed on STM32F412 nucleo boa
 
 # Result
 
-Brightness Control Using Potentiometer
+# Brightness Control Using Potentiometer
 ![Image1](Potentiometer_Brightness.gif)
 
-Automatic Turn On Light in Dark
+# Automatic Turn On Light in Dark
 
-![Image1](Potentiometer_Brightness.gif)
+![Image2](LED_ON_OFF.gif)
